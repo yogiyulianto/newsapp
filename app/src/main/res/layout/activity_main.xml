@@ -14,5 +14,10 @@
         android:divider="#F5F5F5"
         android:dividerHeight="1dp"
         android:visibility="visible"></ListView>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pb-loader"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>
