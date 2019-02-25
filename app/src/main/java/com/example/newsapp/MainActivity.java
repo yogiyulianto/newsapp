@@ -42,15 +42,15 @@ public class MainActivity extends AppCompatActivity {
         loader = findViewById(R.id.pb_loader);
         listView.setEmptyView(loader);
 
-        if ((Function.isNetworkAvailable(getApplicationContext()))){
+        if (Function.isNetworkAvailable(getApplicationContext())){
             DownloadNews newsTask = new DownloadNews();
             newsTask.execute();
         } else {
-            Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG.).show();
+            Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
         }
+    }
 
         class DownloadNews extends AsyncTask<String, Void, String>{
-
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -61,8 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 String urlParameters = "";
                 xml = Function.excuteGet("https://newsapi.org/v1/articles?source="+NEWS_SOURCE+"&sortBy=top&apiKey="+API_KEY, urlParameters);
                 return xml;
-        }
-
+            }
             @Override
             protected void onPostExecute(String xml) {
                 if (xml.length() > 10) {
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     ListNewsAdapter adapter = new ListNewsAdapter(MainActivity.this, dataList);
-                    listView.setAdapter(adapter);
+                    listView.setAdapter((ListAdapter) adapter);
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -97,8 +96,14 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "No news found", Toast.LENGTH_SHORT).show();
                 }
-                }
             }
         }
-}
+
+
+
+
+
+        }
+
+
 
